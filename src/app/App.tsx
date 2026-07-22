@@ -210,58 +210,6 @@ function AccountDetailView({ onBack }: { onBack: () => void }) {
       style={{ fontFamily: "Inter, sans-serif", background: "#f0f2f5" }}
     >
       {/* Header */}
-      <div style={{ background: "#003087" }} className="pt-6 pb-6 px-5">
-        <div className="flex items-center justify-between mb-5">
-          <button
-            onClick={onBack}
-            className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center"
-          >
-            <X size={16} color="white" />
-          </button>
-          <span className="text-white font-semibod text-sm">Kontodetails</span>
-          <button className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-            <Bell size={16} color="white" />
-          </button>
-        </div>
-
-        {/* Balance card */}
-        <div className="bg-white/10 rounded-2xl p-5">
-          <p className="text-blue-200 text-xs font-medium mb-1">
-            {account.name} •{account.number}
-          </p>
-          <div className="flex items-center gap-2 mb-1">
-            <p className="text-3xl text-white">
-              {balanceVisible ? formatEuro(account.balance) : "••••• €"}
-            </p>
-            <button onClick={() => setBalanceVisible(!balanceVisible)}>
-              {balanceVisible ? (
-                <EyeOff size={18} color="rgba(255,255,255,0.6)" />
-              ) : (
-                <Eye size={18} color="rgba(255,255,255,0.6)" />
-              )}
-            </button>
-          </div>
-          <p className="text-blue-200 text-xs">Verfügbares Guthaben</p>
-          <div className="mt-4 pt-4 border-t border-white/20 flex justify-between">
-            <div>
-              <p className="text-blue-200 text-[10px] font-medium uppercase tracking-wide">
-                Überziehungsrahmen
-              </p>
-              <p className="text-white text-sm ">
-                {formatEuro(account.overdraft)}
-              </p>
-            </div>
-            <div className="text-right">
-              <p className="text-blue-200 text-[10px] font-medium uppercase tracking-wide">
-                Gesamt verfügbar
-              </p>
-              <p className="text-white text-sm">
-                {formatEuro(account.balance + account.overdraft)}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* Content */}
       <div className="flex-1 px-4 py-4 pb-24 space-y-4">
@@ -388,7 +336,7 @@ function HomeView({ onAccountClick }: { onAccountClick: () => void }) {
         </div>
         <div>
           <p className="text-sm font-bold pt-3 text-gray-900 text-center">
-            Hallo, Teresita K. Di Costa!
+            Hallo, Teresita Karina!
           </p>
         </div>
         <div className="flex items-center gap-3">
