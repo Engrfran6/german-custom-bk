@@ -22,6 +22,7 @@ import {
   PlusCircle,
   UsersRound,
 } from "lucide-react";
+import cardImage from "../app/image/cardnew.png"; //
 
 type View =
   | "home"
@@ -33,8 +34,8 @@ type View =
 
 const account = {
   name: "Girokonto",
-  number: "2847",
-  iban: "DE58 5003 1900 0019 0049",
+  number: "4970",
+  iban: "DE58 5003 1900 0019 0049 70",
 
   bic: "BBVADEFFXXX",
   holder: "Teresita Karina Di Costa",
@@ -46,7 +47,7 @@ const account = {
 
 const card = {
   name: "Debitkarte",
-  number: "5231",
+  number: "9796",
   expiry: "09/28",
   holder: "Teresita Karina Di Costa",
 };
@@ -57,33 +58,33 @@ const transactions = [
     type: "debit" as const,
     description: "Netflix & Spotify",
     counterpart: "Streaming-Dienste",
-    date: "10. Juli 2025",
-    rawDate: "2025-07-10",
+    date: "22. Juli 2025",
+    rawDate: "2025-07-22",
     amount: 143,
     category: "Unterhaltung",
     icon: "🎬",
-  },
-  {
-    id: 2,
-    type: "debit" as const,
-    description: "Warmmiete Juli",
-    counterpart: "Hausverwaltung Berlin",
-    date: "01. Juli 2025",
-    rawDate: "2025-07-01",
-    amount: 3500,
-    category: "Wohnen",
-    icon: "🏠",
   },
   {
     id: 3,
     type: "debit" as const,
     description: "REWE Supermarkt",
     counterpart: "REWE Group",
-    date: "15. Juli 2025",
-    rawDate: "2025-07-15",
+    date: "17. Juli 2025",
+    rawDate: "2025-07-17",
     amount: 4350,
     category: "Einkaufen",
     icon: "🛒",
+  },
+  {
+    id: 2,
+    type: "debit" as const,
+    description: "Warmmiete Juli",
+    counterpart: "Hausverwaltung Berlin",
+    date: "16. Juli 2025",
+    rawDate: "2025-07-16",
+    amount: 3500,
+    category: "Wohnen",
+    icon: "🏠",
   },
 
   {
@@ -374,7 +375,10 @@ function HomeView({ onAccountClick }: { onAccountClick: () => void }) {
       className="flex flex-col min-h-full"
     >
       {/* Header */}
-      <div className="px-5 pt-4 pb- flex items-start justify-between">
+      <div
+        className="fixed top-0 left-0 py-3 right-0 z-50 w-full  px-5 pt-4 pb- flex items-start justify-between"
+        style={{ fontFamily: "Inter, sans-serif", background: "#f0f2f5" }}
+      >
         <div className="flex flex-col items-center gap-0.5">
           <div className="w-9 h-9 rounded-full bg-white/50 flex items-center justify-center">
             <span className="text-base">
@@ -384,7 +388,7 @@ function HomeView({ onAccountClick }: { onAccountClick: () => void }) {
           <span className="text-[10px] text-gray-500 font-medium">Normal</span>
         </div>
         <div>
-          <p className="text-xs font-bold pt-1.5 text-gray-900 text-center">
+          <p className="text-xs font-bold pt-3 text-gray-900 text-center">
             Hallo, Teresita K. Di Costa!
           </p>
         </div>
@@ -405,7 +409,7 @@ function HomeView({ onAccountClick }: { onAccountClick: () => void }) {
       </div>
 
       {/* Scrollable content */}
-      <div className="flex-1 overflow-y-auto pb-24">
+      <div className="flex-1 overflow-y-auto pb-24 pt-20">
         {/* Promotional Banner */}
         {bannerVisible && (
           <div
@@ -485,22 +489,14 @@ function HomeView({ onAccountClick }: { onAccountClick: () => void }) {
               Debitkarte *{card.number}
             </p>
             <div className="flex items-center gap-3">
-              {/* Card visual */}
-              <div
-                className="w-16 h-10 rounded-lg flex items-center justify-center relative overflow-hidden flex-shrink-0"
-                style={{
-                  background:
-                    "linear-gradient(135deg, #00a2b4 0%, #007a8a 60%, #005f6b 100%)",
-                }}
-              >
-                <div className="absolute inset-0 opacity-20">
-                  <div className="absolute right-0 top-0 w-12 h-12 rounded-full bg-white -translate-y-4 translate-x-4" />
-                </div>
-                <span className="relative text-white text-[8px] font-bold tracking-wide">
-                  BANK
-                </span>
-              </div>
-              <span className="text-sm text-gray-400">• {card.number}</span>
+              <img
+                src={cardImage}
+                alt="Card"
+                className="w-16 h-10 rounded-lg object-cover flex-shrink-0"
+              />
+              <span className="text-sm text-gray-400 pb-2 -ml-3">
+                <span className="text-black/60"> •</span> {card.number}
+              </span>
             </div>
           </div>
         </div>
