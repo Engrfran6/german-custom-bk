@@ -56,37 +56,36 @@ const transactions = [
   {
     id: 4,
     type: "debit" as const,
-    description: "Netflix & Spotify",
+    description: "Einkauf bei MediaMarkt", // Changed from "Netflix & Spotify"
     counterpart: "Streaming-Dienste",
     date: "22. Juli 2025",
     rawDate: "2025-07-22",
-    amount: 143,
-    category: "Unterhaltung",
-    icon: "🎬",
+    amount: 143, // Kept the same
+    category: "Shopping", // Changed from "Unterhaltung"
+    icon: "🛍️", // Changed from "🎬"
   },
   {
     id: 3,
     type: "debit" as const,
-    description: "REWE Supermarkt",
-    counterpart: "REWE Group",
+    description: "Überweisung an Müller", // Changed from "REWE Supermarkt"
+    counterpart: "Thomas Müller", // Changed from "REWE Group"
     date: "17. Juli 2025",
     rawDate: "2025-07-17",
-    amount: 4350,
-    category: "Einkaufen",
-    icon: "🛒",
+    amount: 4350, // Kept the same
+    category: "Privat", // Changed from "Einkaufen"
+    icon: "TM", // Changed from "🛒"
   },
   {
     id: 2,
     type: "debit" as const,
-    description: "Warmmiete Juli",
-    counterpart: "Hausverwaltung Berlin",
+    description: "Überweisung an Schmidt", // Changed from "Warmmiete Juli"
+    counterpart: "Anna Schmidt", // Changed from "Hausverwaltung Berlin"
     date: "16. Juli 2025",
     rawDate: "2025-07-16",
-    amount: 3500,
-    category: "Wohnen",
-    icon: "🏠",
+    amount: 3500, // Kept the same
+    category: "Privat", // Changed from "Wohnen"
+    icon: "AS", // Changed from "🏠"
   },
-
   {
     id: 1,
     type: "credit" as const,
@@ -156,7 +155,7 @@ function TransactionItem({ tx }: { tx: (typeof transactions)[0] }) {
   return (
     <div className="flex items-center gap-3 py-3.5 border-b border-gray-100 last:border-0">
       <div
-        className="w-10 h-10 rounded-full flex items-center justify-center text-base flex-shrink-0"
+        className="w-10 h-10 font-semibold rounded-full flex items-center justify-center text-base flex-shrink-0"
         style={{ background: isCredit ? "#e6f4ea" : "#fce8ec" }}
       >
         {tx.icon}
@@ -388,7 +387,7 @@ function HomeView({ onAccountClick }: { onAccountClick: () => void }) {
           <span className="text-[10px] text-gray-500 font-medium">Normal</span>
         </div>
         <div>
-          <p className="text-xs font-bold pt-3 text-gray-900 text-center">
+          <p className="text-sm font-bold pt-3 text-gray-900 text-center">
             Hallo, Teresita K. Di Costa!
           </p>
         </div>
