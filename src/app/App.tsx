@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useState} from "react";
 import {
   Home,
   Heart,
@@ -24,13 +24,7 @@ import {
 } from "lucide-react";
 import cardImage from "../app/image/cardnew.png"; //
 
-type View =
-  | "home"
-  | "account"
-  | "kontrolle"
-  | "produkte"
-  | "posteingang"
-  | "kontakt";
+type View = "home" | "account" | "kontrolle" | "produkte" | "posteingang" | "kontakt";
 
 const account = {
   name: "Girokonto",
@@ -40,8 +34,8 @@ const account = {
   bic: "BBVADEFFXXX",
   holder: "Teresita Karina Di Costa",
   bank: "",
-  balance: 0.79,
-  available: 0.79,
+  balance: 50.79,
+  available: 50.79,
   overdraft: 2000,
 };
 
@@ -53,6 +47,17 @@ const card = {
 };
 
 const transactions = [
+  {
+    id: 5,
+    type: "credit" as const,
+    description: "Überweisung von anderem Konto",
+    counterpart: "Teresita Karina Di",
+    date: "24. Juli 2026",
+    rawDate: "2026-07-24",
+    amount: 50,
+    category: "Überweisung",
+    icon: "TD",
+  },
   {
     id: 4,
     type: "debit" as const,
@@ -100,28 +105,25 @@ const transactions = [
 ];
 
 const formatEuro = (amount: number) =>
-  new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(
-    amount,
-  );
+  new Intl.NumberFormat("de-DE", {style: "currency", currency: "EUR"}).format(amount);
 
-function NavBar({ active, onNav }: { active: View; onNav: (v: View) => void }) {
-  const items: { id: View; label: string; icon: React.ReactNode }[] = [
-    { id: "home", label: "Übersicht", icon: <Home size={22} /> },
+function NavBar({active, onNav}: {active: View; onNav: (v: View) => void}) {
+  const items: {id: View; label: string; icon: React.ReactNode}[] = [
+    {id: "home", label: "Übersicht", icon: <Home size={22} />},
     {
       id: "kontrolle",
       label: "Kontrolle",
       icon: <LucideHeartCrack size={22} />,
     },
-    { id: "produkte", label: "Produkte", icon: <PlusCircle size={22} /> },
-    { id: "posteingang", label: "Posteingang", icon: <Mail size={22} /> },
-    { id: "kontakt", label: "Kontakt", icon: <UsersRound size={22} /> },
+    {id: "produkte", label: "Produkte", icon: <PlusCircle size={22} />},
+    {id: "posteingang", label: "Posteingang", icon: <Mail size={22} />},
+    {id: "kontakt", label: "Kontakt", icon: <UsersRound size={22} />},
   ];
 
   return (
     <nav
-      style={{ fontFamily: "Inter, sans-serif" }}
-      className="fixed mx-3 mb-2 rounded-2xl bg-white bottom-0 left-0 right-0 z-50 border-t border-gray-200 flex items-stretch"
-    >
+      style={{fontFamily: "Inter, sans-serif"}}
+      className="fixed mx-3 mb-2 rounded-2xl bg-white bottom-0 left-0 right-0 z-50 border-t border-gray-200 flex items-stretch">
       {items.map((item) => {
         const isActive = active === item.id;
         return (
@@ -129,18 +131,15 @@ function NavBar({ active, onNav }: { active: View; onNav: (v: View) => void }) {
             key={item.id}
             onClick={() => onNav(item.id)}
             className="flex-1 flex flex-col items-center justify-center gap-0.5 py-2.5 transition-colors"
-            style={{ color: isActive ? "#e8edf5" : "#8a9abc" }}
-          >
+            style={{color: isActive ? "#e8edf5" : "#8a9abc"}}>
             <span
               className="flex items-center justify-center w-10 h-10 rounded-full transition-colors"
-              style={{ background: isActive ? "#003087" : "transparent" }}
-            >
+              style={{background: isActive ? "#003087" : "transparent"}}>
               {item.icon}
             </span>
             <span
               className="text-[10px] font-medium leading-tight"
-              style={{ color: isActive ? "#003087" : "#8a9abc" }}
-            >
+              style={{color: isActive ? "#003087" : "#8a9abc"}}>
               {item.label}
             </span>
           </button>
@@ -150,14 +149,13 @@ function NavBar({ active, onNav }: { active: View; onNav: (v: View) => void }) {
   );
 }
 
-function TransactionItem({ tx }: { tx: (typeof transactions)[0] }) {
+function TransactionItem({tx}: {tx: (typeof transactions)[0]}) {
   const isCredit = tx.type === "credit";
   return (
     <div className="flex items-center gap-3 py-3.5 border-b border-gray-100 last:border-0">
       <div
         className="w-10 h-10 font-semibold rounded-full flex items-center justify-center text-base flex-shrink-0"
-        style={{ background: isCredit ? "#e6f4ea" : "#fce8ec" }}
-      >
+        style={{background: isCredit ? "#e6f4ea" : "#fce8ec"}}>
         {tx.icon}
       </div>
       <div className="flex-1 min-w-0">
@@ -185,14 +183,12 @@ function TransactionItem({ tx }: { tx: (typeof transactions)[0] }) {
   );
 }
 
-function AccountDetailView({ onBack }: { onBack: () => void }) {
+function AccountDetailView({onBack}: {onBack: () => void}) {
   const [balanceVisible, setBalanceVisible] = useState(true);
   const [ibanCopied, setIbanCopied] = useState(false);
 
   const copyIban = () => {
-    navigator.clipboard
-      .writeText(account.iban.replace(/\s/g, ""))
-      .catch(() => {});
+    navigator.clipboard.writeText(account.iban.replace(/\s/g, "")).catch(() => {});
     setIbanCopied(true);
     setTimeout(() => setIbanCopied(false), 2000);
   };
@@ -207,8 +203,7 @@ function AccountDetailView({ onBack }: { onBack: () => void }) {
   return (
     <div
       className="flex flex-col min-h-full"
-      style={{ fontFamily: "Inter, sans-serif", background: "#f0f2f5" }}
-    >
+      style={{fontFamily: "Inter, sans-serif", background: "#f0f2f5"}}>
       {/* Header */}
 
       {/* Content */}
@@ -223,9 +218,7 @@ function AccountDetailView({ onBack }: { onBack: () => void }) {
           <div className="divide-y divide-gray-50">
             <div className="px-4 py-3.5 flex justify-between items-center">
               <span className="text-sm text-gray-500">Kontoinhaber</span>
-              <span className="text-sm font-semibold text-gray-900">
-                {account.holder}
-              </span>
+              <span className="text-sm font-semibold text-gray-900">{account.holder}</span>
             </div>
             {/* <div className="px-4 py-3.5 flex justify-between items-center">
               <span className="text-sm text-gray-500">Bank</span>
@@ -242,17 +235,14 @@ function AccountDetailView({ onBack }: { onBack: () => void }) {
                 <button
                   onClick={copyIban}
                   className="p-1 rounded-md transition-colors"
-                  style={{ color: ibanCopied ? "#1a7f4b" : "#003087" }}
-                >
+                  style={{color: ibanCopied ? "#1a7f4b" : "#003087"}}>
                   {ibanCopied ? <CheckCircle2 size={16} /> : <Copy size={16} />}
                 </button>
               </div>
             </div>
             <div className="px-4 py-3.5 flex justify-between items-center">
               <span className="text-sm text-gray-500">BIC</span>
-              <span className="text-sm font-semibold text-gray-900 font-mono">
-                {account.bic}
-              </span>
+              <span className="text-sm font-semibold text-gray-900 font-mono">{account.bic}</span>
             </div>
           </div>
         </div>
@@ -288,10 +278,7 @@ function AccountDetailView({ onBack }: { onBack: () => void }) {
             <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
               Letzte Umsätze
             </p>
-            <span
-              className="text-xs font-semibold"
-              style={{ color: "#003087" }}
-            >
+            <span className="text-xs font-semibold" style={{color: "#003087"}}>
               {transactions.length} Buchungen
             </span>
           </div>
@@ -306,7 +293,7 @@ function AccountDetailView({ onBack }: { onBack: () => void }) {
   );
 }
 
-function HomeView({ onAccountClick }: { onAccountClick: () => void }) {
+function HomeView({onAccountClick}: {onAccountClick: () => void}) {
   const [bannerVisible, setBannerVisible] = useState(true);
   const totalDebit = transactions
     .filter((t) => t.type === "debit")
@@ -318,14 +305,12 @@ function HomeView({ onAccountClick }: { onAccountClick: () => void }) {
 
   return (
     <div
-      style={{ fontFamily: "Inter, sans-serif", background: "#f0f2f5" }}
-      className="flex flex-col min-h-full"
-    >
+      style={{fontFamily: "Inter, sans-serif", background: "#f0f2f5"}}
+      className="flex flex-col min-h-full">
       {/* Header */}
       <div
         className="fixed top-0 left-0 py-3 right-0 z-50 w-full  px-5 pt-4 pb- flex items-start justify-between"
-        style={{ fontFamily: "Inter, sans-serif", background: "#f0f2f5" }}
-      >
+        style={{fontFamily: "Inter, sans-serif", background: "#f0f2f5"}}>
         <div className="flex flex-col items-center gap-0.5">
           <div className="w-9 h-9 rounded-full bg-white/50 flex items-center justify-center">
             <span className="text-base">
@@ -359,10 +344,7 @@ function HomeView({ onAccountClick }: { onAccountClick: () => void }) {
       <div className="flex-1 overflow-y-auto pb-24 pt-20">
         {/* Promotional Banner */}
         {bannerVisible && (
-          <div
-            className="mx-4 mt-4 rounded-2xl overflow-hidden"
-            style={{ background: "#003087" }}
-          >
+          <div className="mx-4 mt-4 rounded-2xl overflow-hidden" style={{background: "#003087"}}>
             <div className="p-4">
               <div className="flex items-start justify-between">
                 <div className="flex items-start gap-">
@@ -376,18 +358,14 @@ function HomeView({ onAccountClick }: { onAccountClick: () => void }) {
                     <p className="text-blue-200 text-xs mt-1 leading-relaxed">
                       Gehalt & Lastschriften automatisch übertragen.
                     </p>
-                    <button
-                      className="mt-2 text-xs font-semibold"
-                      style={{ color: "#5bc8f5" }}
-                    >
+                    <button className="mt-2 text-xs font-semibold" style={{color: "#5bc8f5"}}>
                       Mehr erfahren
                     </button>
                   </div>
                 </div>
                 <button
                   onClick={() => setBannerVisible(false)}
-                  className="-mt-1.5 w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
-                >
+                  className="-mt-1.5 w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0">
                   <X size={12} color="white" />
                 </button>
               </div>
@@ -399,25 +377,20 @@ function HomeView({ onAccountClick }: { onAccountClick: () => void }) {
         <div className="px-4 mt-3">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-lg font-bold text-gray-900">Konten</h2>
-            <span className="text-sm text-gray-600">
-              {formatEuro(account.balance)}
-            </span>
+            <span className="text-sm text-gray-600">{formatEuro(account.balance)}</span>
           </div>
           <button
             onClick={onAccountClick}
-            className="w-full bg-white/80 rounded-2xl p-4 flex items-center justify-between active:opacity-80 transition-opacity"
-          >
+            className="w-full bg-white/80 rounded-2xl p-4 flex items-center justify-between active:opacity-80 transition-opacity">
             <div className="text-left">
-              <p className="text-sm font-medium" style={{ color: "#003087" }}>
+              <p className="text-sm font-medium" style={{color: "#003087"}}>
                 {account.name} *{account.number}
               </p>
               <p className="text-xs text-gray-400 mt-0.5">• {account.number}</p>
             </div>
             <div className="flex items-center gap-2">
               <div className="text-right">
-                <p className="text-base font-medium text-gray-900">
-                  {formatEuro(account.balance)}
-                </p>
+                <p className="text-base font-medium text-gray-900">{formatEuro(account.balance)}</p>
                 <p className="text-xs text-gray-400">Verfügbar</p>
               </div>
               <ChevronRight size={16} color="#9ca3af" />
@@ -429,10 +402,7 @@ function HomeView({ onAccountClick }: { onAccountClick: () => void }) {
         <div className="px-4 mt-5">
           <h2 className="text-lg font-medium text-gray-900 mb-3">Karten</h2>
           <div className="bg-white/80 rounded-2xl p-4">
-            <p
-              className="text-sm font-medium mb-3"
-              style={{ color: "#003087" }}
-            >
+            <p className="text-sm font-medium mb-3" style={{color: "#003087"}}>
               Debitkarte *{card.number}
             </p>
             <div className="flex items-center gap-3">
@@ -453,33 +423,20 @@ function HomeView({ onAccountClick }: { onAccountClick: () => void }) {
           <h2 className="text-lg text-gray-900 mb-3">Finanzkontrolle</h2>
           <div className="grid grid-cols-3 gap-2">
             <div className="bg-white rounded-2xl p-3">
-              <p className="text-base text-gray-900 leading-tight">
-                {formatEuro(totalDebit)}
-              </p>
-              <p
-                className="text-xs font-semibold mt-1"
-                style={{ color: "#003087" }}
-              >
+              <p className="text-base text-gray-900 leading-tight">{formatEuro(totalDebit)}</p>
+              <p className="text-xs font-semibold mt-1" style={{color: "#003087"}}>
                 Ausgaben
               </p>
             </div>
             <div className="bg-white rounded-2xl p-3">
-              <p className="text-base  text-gray-900 leading-tight">
-                {formatEuro(totalCredit)}
-              </p>
-              <p
-                className="text-xs font-semibold mt-1"
-                style={{ color: "#003087" }}
-              >
+              <p className="text-base  text-gray-900 leading-tight">{formatEuro(totalCredit)}</p>
+              <p className="text-xs font-semibold mt-1" style={{color: "#003087"}}>
                 Einnahmen
               </p>
             </div>
             <div className="bg-white rounded-2xl p-3">
               <p className="text-base leading-tight">{formatEuro(savings)}</p>
-              <p
-                className="text-xs font-semibold mt-1"
-                style={{ color: "#003087" }}
-              >
+              <p className="text-xs font-semibold mt-1" style={{color: "#003087"}}>
                 Ersparnisse
               </p>
             </div>
@@ -490,10 +447,7 @@ function HomeView({ onAccountClick }: { onAccountClick: () => void }) {
         <div className="px-4 mt-5">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-lg text-gray-900">Letzte Umsätze</h2>
-            <button
-              className="text-xs font-semibold"
-              style={{ color: "#003087" }}
-            >
+            <button className="text-xs font-semibold" style={{color: "#003087"}}>
               Alle ansehen
             </button>
           </div>
@@ -508,10 +462,7 @@ function HomeView({ onAccountClick }: { onAccountClick: () => void }) {
         <div className="px-4 mt-5">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-lg font-bold text-gray-900">Empfohlen</h2>
-            <button
-              className="text-xs font-semibold"
-              style={{ color: "#003087" }}
-            >
+            <button className="text-xs font-semibold" style={{color: "#003087"}}>
               Alle ansehen
             </button>
           </div>
@@ -520,12 +471,8 @@ function HomeView({ onAccountClick }: { onAccountClick: () => void }) {
               <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center mb-2">
                 <CreditCard size={16} color="#003087" />
               </div>
-              <p className="text-xs font-bold text-gray-900">
-                Kreditkarte beantragen
-              </p>
-              <p className="text-[10px] text-gray-400 mt-1">
-                Bis zu 1.500 € Limit
-              </p>
+              <p className="text-xs font-bold text-gray-900">Kreditkarte beantragen</p>
+              <p className="text-[10px] text-gray-400 mt-1">Bis zu 1.500 € Limit</p>
             </div>
             <div className="bg-white rounded-2xl p-4">
               <div className="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center mb-2">
@@ -541,29 +488,19 @@ function HomeView({ onAccountClick }: { onAccountClick: () => void }) {
   );
 }
 
-function PlaceholderView({
-  title,
-  icon,
-}: {
-  title: string;
-  icon: React.ReactNode;
-}) {
+function PlaceholderView({title, icon}: {title: string; icon: React.ReactNode}) {
   return (
     <div
       className="flex flex-col items-center justify-center flex-1 gap-4 pb-24"
-      style={{ fontFamily: "Inter, sans-serif" }}
-    >
+      style={{fontFamily: "Inter, sans-serif"}}>
       <div
         className="w-16 h-16 rounded-full flex items-center justify-center"
-        style={{ background: "#e8edf5" }}
-      >
-        <span style={{ color: "#003087" }}>{icon}</span>
+        style={{background: "#e8edf5"}}>
+        <span style={{color: "#003087"}}>{icon}</span>
       </div>
       <div className="text-center">
         <h2 className="text-lg font-bold text-gray-900">{title}</h2>
-        <p className="text-sm text-gray-400 mt-1">
-          Dieser Bereich ist in Kürze verfügbar.
-        </p>
+        <p className="text-sm text-gray-400 mt-1">Dieser Bereich ist in Kürze verfügbar.</p>
       </div>
     </div>
   );
@@ -581,8 +518,7 @@ export default function App() {
   return (
     <div
       className="relative flex flex-col min-h-screen max-w-[430px] mx-auto overflow-hidden"
-      style={{ background: "#f0f2f5", fontFamily: "Inter, sans-serif" }}
-    >
+      style={{background: "#f0f2f5", fontFamily: "Inter, sans-serif"}}>
       {/* Main content */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {showAccount ? (
@@ -595,10 +531,7 @@ export default function App() {
           </div>
         ) : activeNav === "kontrolle" ? (
           <div className="flex-1 flex flex-col pt-12">
-            <PlaceholderView
-              title="Finanzkontrolle"
-              icon={<Heart size={28} />}
-            />
+            <PlaceholderView title="Finanzkontrolle" icon={<Heart size={28} />} />
           </div>
         ) : activeNav === "produkte" ? (
           <div className="flex-1 flex flex-col pt-12">
