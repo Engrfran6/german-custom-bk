@@ -50,7 +50,7 @@ const transactions = [
   {
     id: 5,
     type: "credit" as const,
-    description: "Überweisung von anderem Konto",
+    description: "Überweisung Teresita Karina Di",
     counterpart: "Teresita Karina Di",
     date: "24. Juli 2026",
     rawDate: "2026-07-24",
