@@ -320,9 +320,7 @@ function HomeView({onAccountClick}: {onAccountClick: () => void}) {
           <span className="text-[10px] text-gray-500 font-medium">Normal</span>
         </div>
         <div>
-          <p className="text-sm font-bold pt-3 text-gray-900 text-center">
-            Hallo, Teresita Karina!
-          </p>
+          <p className="text-sm font-bold pt-3 text-gray-900 text-center">Hallo, Liv Tyler</p>
         </div>
         <div className="flex items-center gap-3">
           <div className="flex flex-col items-center gap-0.5">
