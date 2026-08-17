@@ -32,18 +32,18 @@ const account = {
   iban: "DE58 5003 1900 0019 0049 70",
 
   bic: "BBVADEFFXXX",
-  holder: "Teresita Karina Di Costa",
+  holder: "Liv Tyler",
   bank: "",
-  balance: 50.79,
-  available: 50.79,
-  overdraft: 2000,
+  balance: 28460.79,
+  available: 28460.79,
+  overdraft: 0.0,
 };
 
 const card = {
   name: "Debitkarte",
   number: "9796",
   expiry: "09/28",
-  holder: "Teresita Karina Di Costa",
+  holder: "Liv Tyler",
 };
 
 const transactions = [
@@ -54,7 +54,7 @@ const transactions = [
     counterpart: "Teresita Karina Di",
     date: "24. Juli 2026",
     rawDate: "2026-07-24",
-    amount: 50,
+    amount: 1500,
     category: "Überweisung",
     icon: "TD",
   },
@@ -65,7 +65,7 @@ const transactions = [
     counterpart: "Streaming-Dienste",
     date: "22. Juli 2025",
     rawDate: "2025-07-22",
-    amount: 143, // Kept the same
+    amount: 1450, // Kept the same
     category: "Shopping", // Changed from "Unterhaltung"
     icon: "🛍️", // Changed from "🎬"
   },
